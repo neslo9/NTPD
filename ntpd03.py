@@ -11,6 +11,15 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import numpy as np
+import os
+API_KEY = os.getenv("API_KEY")
+if not API_KEY:
+    raise RuntimeError("Brak wymaganego API_KEY w zmiennych środowiskowych")
+
+@app.get("/config")
+def read_config():
+    # UWAGA: w produkcji nie ujawniaj sekretów! Tu tylko na potrzeby demonstracji.
+    return {"api_key": API_KEY}
 
 
 # Wczytanie zbioru danych Breast Cancer
